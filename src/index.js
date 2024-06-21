@@ -14,13 +14,11 @@ app.use("/control", controlRouter);
 
 app.post("/start", (req, res) => {
   console.log("Received start request");
-  // Perform start action logic here
   res.send("Start action completed");
 });
 
 app.post("/stop", (req, res) => {
   console.log("Received stop request");
-  // Perform stop action logic here
   res.send("Stop action completed");
 });
 

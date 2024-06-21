@@ -68,7 +68,7 @@ const logOnOptions2 = {
   twoFactorCode: SteamTotp.generateAuthCode(process.env.shared2),
 };
 
-user.logOn(logOnOptions);
+// user.logOn(logOnOptions);
 user2.logOn(logOnOptions2);
 
 user.on("loggedOn", () => {

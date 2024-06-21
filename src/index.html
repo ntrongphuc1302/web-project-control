@@ -61,7 +61,6 @@
     </div>
 
     <script>
-      // Function to handle errors
       function handleError(error) {
         console.error("Error:", error);
         alert("An error occurred. Please try again.");
@@ -79,7 +78,6 @@
             })
             .then((data) => {
               console.log("Steam Farm started:", data);
-              // Optionally, update UI to reflect status
             })
             .catch((error) => {
               handleError(error);
@@ -96,7 +94,6 @@
           })
           .then((data) => {
             console.log("Steam Farm stopped:", data);
-            // Optionally, update UI to reflect status
           })
           .catch((error) => {
             handleError(error);
@@ -115,7 +112,6 @@
             })
             .then((data) => {
               console.log("Discord Idle started:", data);
-              // Optionally, update UI to reflect status
             })
             .catch((error) => {
               handleError(error);

@@ -11,7 +11,7 @@ router.post("/start/steam-farm", (req, res) => {
   if (!steamFarmProcess) {
     const steamFarmScript = path.join(
       __dirname,
-      "../../src/steam-farm/index.js"
+      "../../src/services/steam-farm.js"
     );
     steamFarmProcess = spawn("node", [steamFarmScript]);
 
@@ -58,7 +58,7 @@ router.post("/start/discord-idle", (req, res) => {
   if (!discordIdleProcess) {
     const discordIdleScript = path.join(
       __dirname,
-      "../../src/discord-idle/index.js"
+      "../../src/services/discord-idle.js"
     );
     discordIdleProcess = spawn("node", [discordIdleScript]);
 
