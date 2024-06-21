@@ -61,31 +61,45 @@
     </div>
 
     <script>
+      // Function to handle errors
+      function handleError(error) {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again.");
+      }
+
       document
         .getElementById("startSteamFarm")
         .addEventListener("click", () => {
           fetch("/control/start/steam-farm", { method: "POST" })
-            .then((response) => response.text())
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.text();
+            })
             .then((data) => {
               console.log("Steam Farm started:", data);
-              alert(data);
+              // Optionally, update UI to reflect status
             })
             .catch((error) => {
-              console.error("Error starting Steam Farm:", error);
-              alert("Failed to start Steam Farm");
+              handleError(error);
             });
         });
 
       document.getElementById("stopSteamFarm").addEventListener("click", () => {
         fetch("/control/stop/steam-farm", { method: "POST" })
-          .then((response) => response.text())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
           .then((data) => {
             console.log("Steam Farm stopped:", data);
-            alert(data);
+            // Optionally, update UI to reflect status
           })
           .catch((error) => {
-            console.error("Error stopping Steam Farm:", error);
-            alert("Failed to stop Steam Farm");
+            handleError(error);
           });
       });
 
@@ -93,14 +107,18 @@
         .getElementById("startDiscordIdle")
         .addEventListener("click", () => {
           fetch("/control/start/discord-idle", { method: "POST" })
-            .then((response) => response.text())
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.text();
+            })
             .then((data) => {
               console.log("Discord Idle started:", data);
-              alert(data);
+              // Optionally, update UI to reflect status
             })
             .catch((error) => {
-              console.error("Error starting Discord Idle:", error);
-              alert("Failed to start Discord Idle");
+              handleError(error);
             });
         });
 
@@ -108,14 +126,18 @@
         .getElementById("stopDiscordIdle")
         .addEventListener("click", () => {
           fetch("/control/stop/discord-idle", { method: "POST" })
-            .then((response) => response.text())
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              return response.text();
+            })
             .then((data) => {
               console.log("Discord Idle stopped:", data);
-              alert(data);
+              // Optionally, update UI to reflect status
             })
             .catch((error) => {
-              console.error("Error stopping Discord Idle:", error);
-              alert("Failed to stop Discord Idle");
+              handleError(error);
             });
         });
     </script>

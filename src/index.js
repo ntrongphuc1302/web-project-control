@@ -1,13 +1,29 @@
-document.getElementById("start-button").addEventListener("click", () => {
-  fetch("/start", { method: "POST" })
-    .then((response) => response.text())
-    .then((message) => alert(message))
-    .catch((error) => console.error("Error:", error));
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+
+const express = require("express");
+const controlRouter = require("./controllers/control");
+
+const app = express();
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, "..", "src")));
+app.use(express.json());
+
+app.use("/control", controlRouter);
+
+app.post("/start", (req, res) => {
+  console.log("Received start request");
+  // Perform start action logic here
+  res.send("Start action completed");
 });
 
-document.getElementById("stop-button").addEventListener("click", () => {
-  fetch("/stop", { method: "POST" })
-    .then((response) => response.text())
-    .then((message) => alert(message))
-    .catch((error) => console.error("Error:", error));
+app.post("/stop", (req, res) => {
+  console.log("Received stop request");
+  // Perform stop action logic here
+  res.send("Stop action completed");
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
