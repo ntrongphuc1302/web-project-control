@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Page</title>
+    <style>
+      body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h2 {
+        color: #ffffff;
+      }
+      .container {
+        text-align: center;
+        background-color: #1f1f1f;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      button {
+        background-color: #6200ea;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #3700b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Control Page</h1>
+      <div>
+        <h2>Steam Farm</h2>
+        <button id="startSteamFarm">Start Steam Farm</button>
+        <button id="stopSteamFarm">Stop Steam Farm</button>
+      </div>
+      <div>
+        <h2>Discord Idle</h2>
+        <button id="startDiscordIdle">Start Discord Idle</button>
+        <button id="stopDiscordIdle">Stop Discord Idle</button>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("startSteamFarm")
+        .addEventListener("click", () => {
+          fetch("/control/start/steam-farm", { method: "POST" })
+            .then((response) => response.text())
+            .then((data) => {
+              console.log("Steam Farm started:", data);
+              alert(data);
+            })
+            .catch((error) => {
+              console.error("Error starting Steam Farm:", error);
+              alert("Failed to start Steam Farm");
+            });
+        });
+
+      document.getElementById("stopSteamFarm").addEventListener("click", () => {
+        fetch("/control/stop/steam-farm", { method: "POST" })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log("Steam Farm stopped:", data);
+            alert(data);
+          })
+          .catch((error) => {
+            console.error("Error stopping Steam Farm:", error);
+            alert("Failed to stop Steam Farm");
+          });
+      });
+
+      document
+        .getElementById("startDiscordIdle")
+        .addEventListener("click", () => {
+          fetch("/control/start/discord-idle", { method: "POST" })
+            .then((response) => response.text())
+            .then((data) => {
+              console.log("Discord Idle started:", data);
+              alert(data);
+            })
+            .catch((error) => {
+              console.error("Error starting Discord Idle:", error);
+              alert("Failed to start Discord Idle");
+            });
+        });
+
+      document
+        .getElementById("stopDiscordIdle")
+        .addEventListener("click", () => {
+          fetch("/control/stop/discord-idle", { method: "POST" })
+            .then((response) => response.text())
+            .then((data) => {
+              console.log("Discord Idle stopped:", data);
+              alert(data);
+            })
+            .catch((error) => {
+              console.error("Error stopping Discord Idle:", error);
+              alert("Failed to stop Discord Idle");
+            });
+        });
+    </script>
+  </body>
+</html>

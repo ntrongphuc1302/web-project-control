@@ -1,0 +1,31 @@
+{
+  "name": "peter-web-project-control",
+  "version": "1.0.0",
+  "description": "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ntrongphuc1302/peter-web-project-control)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntrongphuc1302/peter-web-project-control.git"
+  },
+  "author": "https://github.com/ntrongphuc1302",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntrongphuc1302/peter-web-project-control/issues"
+  },
+  "homepage": "https://github.com/ntrongphuc1302/peter-web-project-control#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "eris": "^0.17.2",
+    "express": "^4.19.2",
+    "steam-totp": "^2.1.2",
+    "steam-user": "^5.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
