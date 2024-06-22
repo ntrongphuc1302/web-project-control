@@ -43,18 +43,36 @@
       button:hover {
         background-color: #3700b3;
       }
+      .status {
+        /* display: inline-block;
+        margin-left: 10px;
+        padding: 5px 10px;
+        border-radius: 4px; */
+      }
+      .status.running {
+        color: green;
+      }
+      .status.stopped {
+        color: red;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Control Page</h1>
       <div>
-        <h2>Steam Farm</h2>
+        <h2>
+          Steam Farm Status:
+          <span id="steamFarmStatus" class="status">Unknown</span>
+        </h2>
         <button id="startSteamFarm">Start Steam Farm</button>
         <button id="stopSteamFarm">Stop Steam Farm</button>
       </div>
       <div>
-        <h2>Discord Idle</h2>
+        <h2>
+          Discord Idle Status:
+          <span id="discordIdleStatus" class="status">Unknown</span>
+        </h2>
         <button id="startDiscordIdle">Start Discord Idle</button>
         <button id="stopDiscordIdle">Stop Discord Idle</button>
       </div>
@@ -64,6 +82,55 @@
       function handleError(error) {
         console.error("Error:", error);
         alert("An error occurred. Please try again.");
+      }
+
+      function updateStatus() {
+        fetch("/control/status/steam-farm")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const steamFarmStatus = document.getElementById("steamFarmStatus");
+            steamFarmStatus.textContent =
+              data.status.charAt(0).toUpperCase() + data.status.slice(1);
+            if (data.status === "ON") {
+              steamFarmStatus.classList.add("running");
+              steamFarmStatus.classList.remove("stopped");
+            } else {
+              steamFarmStatus.classList.add("stopped");
+              steamFarmStatus.classList.remove("running");
+            }
+          })
+          .catch((error) => {
+            handleError(error);
+          });
+
+        fetch("/control/status/discord-idle")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const discordIdleStatus =
+              document.getElementById("discordIdleStatus");
+            discordIdleStatus.textContent =
+              data.status.charAt(0).toUpperCase() + data.status.slice(1);
+            if (data.status === "ON") {
+              discordIdleStatus.classList.add("running");
+              discordIdleStatus.classList.remove("stopped");
+            } else {
+              discordIdleStatus.classList.add("stopped");
+              discordIdleStatus.classList.remove("running");
+            }
+          })
+          .catch((error) => {
+            handleError(error);
+          });
       }
 
       document
@@ -78,6 +145,7 @@
             })
             .then((data) => {
               console.log("Steam Farm started:", data);
+              updateStatus(); // Update status after starting
             })
             .catch((error) => {
               handleError(error);
@@ -94,6 +162,7 @@
           })
           .then((data) => {
             console.log("Steam Farm stopped:", data);
+            updateStatus(); // Update status after stopping
           })
           .catch((error) => {
             handleError(error);
@@ -112,6 +181,7 @@
             })
             .then((data) => {
               console.log("Discord Idle started:", data);
+              updateStatus(); // Update status after starting
             })
             .catch((error) => {
               handleError(error);
@@ -130,12 +200,17 @@
             })
             .then((data) => {
               console.log("Discord Idle stopped:", data);
-              // Optionally, update UI to reflect status
+              updateStatus(); // Update status after stopping
             })
             .catch((error) => {
               handleError(error);
             });
         });
+
+      // Update status every 20 ms
+      setInterval(updateStatus, 20);
+      // Initial status update
+      updateStatus();
     </script>
   </body>
 </html>

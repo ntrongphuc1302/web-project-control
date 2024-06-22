@@ -100,4 +100,22 @@ router.post("/stop/discord-idle", (req, res) => {
   }
 });
 
+// New route to get the status of Steam Farm
+router.get("/status/steam-farm", (req, res) => {
+  if (steamFarmProcess) {
+    res.send({ status: "ON" });
+  } else {
+    res.send({ status: "OFF" });
+  }
+});
+
+// New route to get the status of Discord Idle
+router.get("/status/discord-idle", (req, res) => {
+  if (discordIdleProcess) {
+    res.send({ status: "ON" });
+  } else {
+    res.send({ status: "OFF" });
+  }
+});
+
 module.exports = router;

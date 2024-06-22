@@ -96,10 +96,8 @@ user2.on("loggedOn", () => {
 
 user.on("error", (err) => {
   console.error("SteamUser encountered an error:", err.message);
-  // Handle specific errors like "InvalidPassword" or log them for investigation
 });
 
 user2.on("error", (err) => {
   console.error("SteamUser2 encountered an error:", err.message);
-  // Handle specific errors like "InvalidPassword" or log them for investigation
 });
