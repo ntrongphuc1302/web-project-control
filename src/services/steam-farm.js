@@ -7,8 +7,8 @@ const SteamTotp = require("steam-totp");
 const user = new SteamUser();
 const user2 = new SteamUser();
 
-const status = 1; // 0 = offline, 1 = online, 2 = busy, 3 = away, 4 = snooze, 5 = looking to trade, 6 = looking to play 7 = invisible
-const status2 = 1; // 0 = offline, 1 = online, 2 = busy, 3 = away, 4 = snooze, 5 = looking to trade, 6 = looking to play 7 = invisible
+const status = 7;
+const status2 = 1;
 
 const games = [
   730, //Counter-Strike 2
