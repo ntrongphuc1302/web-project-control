@@ -79,6 +79,21 @@ function updateStatus() {
     .catch((error) => {
       handleError(error);
     });
+
+  fetch("/uptime")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const uptime = document.getElementById("uptime");
+      uptime.textContent = data.uptime;
+    })
+    .catch((error) => {
+      handleError(error);
+    });
 }
 
 function updateColor(element, value) {

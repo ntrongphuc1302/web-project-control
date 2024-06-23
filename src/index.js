@@ -26,6 +26,12 @@ app.get("/ram", (req, res) => {
   res.json({ ramUsage: ramUsage.toFixed(2) });
 });
 
+app.get("/uptime", (req, res) => {
+  const uptimeSeconds = os.uptime();
+  const uptime = new Date(uptimeSeconds * 1000).toISOString().substr(11, 8); // Convert to HH:MM:SS
+  res.json({ uptime });
+});
+
 app.use("/control", controlRouter);
 
 app.post("/start", (req, res) => {
