@@ -31,18 +31,8 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
-      button {
-        background-color: #6200ea;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        margin: 10px;
-        border-radius: 4px;
+      .status {
         cursor: pointer;
-        font-size: 16px;
-      }
-      button:hover {
-        background-color: #3700b3;
       }
       .status.running {
         color: green;
@@ -57,19 +47,15 @@
       <h1>Control Panel</h1>
       <div>
         <h2>
-          Steam Farm Status:
+          Steam Farm:
           <span id="steamFarmStatus" class="status">Unknown</span>
         </h2>
-        <button id="startSteamFarm">Start Steam Farm</button>
-        <button id="stopSteamFarm">Stop Steam Farm</button>
       </div>
       <div>
         <h2>
-          Discord Idle Status:
+          Discord Idle:
           <span id="discordIdleStatus" class="status">Unknown</span>
         </h2>
-        <button id="startDiscordIdle">Start Discord Idle</button>
-        <button id="stopDiscordIdle">Stop Discord Idle</button>
       </div>
     </div>
 
@@ -89,8 +75,7 @@
           })
           .then((data) => {
             const steamFarmStatus = document.getElementById("steamFarmStatus");
-            steamFarmStatus.textContent =
-              data.status.charAt(0).toUpperCase() + data.status.slice(1);
+            steamFarmStatus.textContent = data.status === "ON" ? "ON" : "OFF";
             if (data.status === "ON") {
               steamFarmStatus.classList.add("running");
               steamFarmStatus.classList.remove("stopped");
@@ -113,8 +98,7 @@
           .then((data) => {
             const discordIdleStatus =
               document.getElementById("discordIdleStatus");
-            discordIdleStatus.textContent =
-              data.status.charAt(0).toUpperCase() + data.status.slice(1);
+            discordIdleStatus.textContent = data.status === "ON" ? "ON" : "OFF";
             if (data.status === "ON") {
               discordIdleStatus.classList.add("running");
               discordIdleStatus.classList.remove("stopped");
@@ -128,27 +112,14 @@
           });
       }
 
-      document
-        .getElementById("startSteamFarm")
-        .addEventListener("click", () => {
-          fetch("/control/start/steam-farm", { method: "POST" })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Network response was not ok");
-              }
-              return response.text();
-            })
-            .then((data) => {
-              console.log("Steam Farm started:", data);
-              updateStatus();
-            })
-            .catch((error) => {
-              handleError(error);
-            });
-        });
-
-      document.getElementById("stopSteamFarm").addEventListener("click", () => {
-        fetch("/control/stop/steam-farm", { method: "POST" })
+      function toggleSteamFarm() {
+        const statusElement = document.getElementById("steamFarmStatus");
+        const currentStatus = statusElement.textContent;
+        const url =
+          currentStatus === "ON"
+            ? "/control/stop/steam-farm"
+            : "/control/start/steam-farm";
+        fetch(url, { method: "POST" })
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -156,51 +127,50 @@
             return response.text();
           })
           .then((data) => {
-            console.log("Steam Farm stopped:", data);
+            console.log(
+              `Steam Farm ${currentStatus === "ON" ? "stopped" : "started"}:`,
+              data
+            );
             updateStatus();
           })
           .catch((error) => {
             handleError(error);
           });
-      });
+      }
+
+      function toggleDiscordIdle() {
+        const statusElement = document.getElementById("discordIdleStatus");
+        const currentStatus = statusElement.textContent;
+        const url =
+          currentStatus === "ON"
+            ? "/control/stop/discord-idle"
+            : "/control/start/discord-idle";
+        fetch(url, { method: "POST" })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((data) => {
+            console.log(
+              `Discord Idle ${currentStatus === "ON" ? "stopped" : "started"}:`,
+              data
+            );
+            updateStatus();
+          })
+          .catch((error) => {
+            handleError(error);
+          });
+      }
 
       document
-        .getElementById("startDiscordIdle")
-        .addEventListener("click", () => {
-          fetch("/control/start/discord-idle", { method: "POST" })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Network response was not ok");
-              }
-              return response.text();
-            })
-            .then((data) => {
-              console.log("Discord Idle started:", data);
-              updateStatus();
-            })
-            .catch((error) => {
-              handleError(error);
-            });
-        });
-
+        .getElementById("steamFarmStatus")
+        .addEventListener("click", toggleSteamFarm);
       document
-        .getElementById("stopDiscordIdle")
-        .addEventListener("click", () => {
-          fetch("/control/stop/discord-idle", { method: "POST" })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Network response was not ok");
-              }
-              return response.text();
-            })
-            .then((data) => {
-              console.log("Discord Idle stopped:", data);
-              updateStatus();
-            })
-            .catch((error) => {
-              handleError(error);
-            });
-        });
+        .getElementById("discordIdleStatus")
+        .addEventListener("click", toggleDiscordIdle);
+
       setInterval(updateStatus, 1000);
       updateStatus();
     </script>
