@@ -47,6 +47,48 @@ function updateStatus() {
     .catch((error) => {
       handleError(error);
     });
+
+  fetch("/cpu")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const cpuUsage = document.getElementById("cpuUsage");
+      cpuUsage.textContent = `${data.cpuUsage}%`;
+      updateColor(cpuUsage, parseFloat(data.cpuUsage));
+    })
+    .catch((error) => {
+      handleError(error);
+    });
+
+  fetch("/ram")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const ramUsage = document.getElementById("ramUsage");
+      ramUsage.textContent = `${data.ramUsage}%`;
+      updateColor(ramUsage, parseFloat(data.ramUsage));
+    })
+    .catch((error) => {
+      handleError(error);
+    });
+}
+
+function updateColor(element, value) {
+  if (value < 50) {
+    element.style.color = "green";
+  } else if (value < 75) {
+    element.style.color = "yellow";
+  } else {
+    element.style.color = "red";
+  }
 }
 
 function toggleSteamFarm() {
