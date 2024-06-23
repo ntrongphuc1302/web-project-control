@@ -15,9 +15,14 @@ h1 {
   margin-bottom: 20px;
 }
 h2 {
+  width: 100%;
   color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
 }
 .container {
+  width: 200px;
   text-align: center;
   background-color: #1f1f1f;
   padding: 5px 20px 5px 20px;
@@ -28,6 +33,7 @@ h2 {
   cursor: pointer;
 }
 .status.running {
+  text-align: center;
   color: green;
 }
 .status.stopped {
