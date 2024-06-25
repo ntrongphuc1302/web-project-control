@@ -90,10 +90,10 @@ router.post("/stop/discord-idle", (req, res) => {
     // );
     discordIdleProcess.kill("SIGINT"); // Send SIGINT to gracefully terminate the process
     discordIdleProcess.on("exit", (code, signal) => {
-      // console
+      // console(
       //   .log
       //   `Discord Idle process exited with code ${code} and signal ${signal}`
-      //   ();
+      //   );
       discordIdleProcess = null;
       res.send("Discord Idle stopped.");
     });
@@ -102,7 +102,6 @@ router.post("/stop/discord-idle", (req, res) => {
   }
 });
 
-// New route to get the status of Steam Farm
 router.get("/status/steam-farm", (req, res) => {
   if (steamFarmProcess) {
     res.send({ status: "ON" });
@@ -111,7 +110,6 @@ router.get("/status/steam-farm", (req, res) => {
   }
 });
 
-// New route to get the status of Discord Idle
 router.get("/status/discord-idle", (req, res) => {
   if (discordIdleProcess) {
     res.send({ status: "ON" });
