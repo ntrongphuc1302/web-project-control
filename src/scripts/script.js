@@ -148,10 +148,16 @@ function toggleSteamFarm() {
         `Steam Farm ${currentStatus === "ON" ? "stopped" : "started"}:`,
         data
       );
-      updateSteamFarmStatus(); // Update status after toggling
+      // Update status after toggling
+      updateSteamFarmStatus();
     })
     .catch((error) => {
-      console.error("Error toggling Steam Farm status:", error);
+      console.error(
+        `Error toggling Steam Farm ${
+          currentStatus === "ON" ? "stop" : "start"
+        }:`,
+        error
+      );
       handleError(error);
     });
 }
@@ -176,10 +182,16 @@ function toggleDiscordIdle() {
         `Discord Idle ${currentStatus === "ON" ? "stopped" : "started"}:`,
         data
       );
-      updateDiscordIdleStatus(); // Update status after toggling
+      // Update status after toggling
+      updateDiscordIdleStatus();
     })
     .catch((error) => {
-      console.error("Error toggling Discord Idle status:", error);
+      console.error(
+        `Error toggling Discord Idle ${
+          currentStatus === "ON" ? "stop" : "start"
+        }:`,
+        error
+      );
       handleError(error);
     });
 }

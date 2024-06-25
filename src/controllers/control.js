@@ -24,7 +24,7 @@ router.post("/start/steam-farm", (req, res) => {
     });
 
     steamFarmProcess.on("close", (code) => {
-      console.log(`Steam Farm process exited with code ${code}`);
+      // console.log(`Steam Farm process exited with code ${code}`);
       steamFarmProcess = null;
     });
 
@@ -37,14 +37,15 @@ router.post("/start/steam-farm", (req, res) => {
 router.post("/stop/steam-farm", (req, res) => {
   console.log("Received request to stop Steam Farm");
   if (steamFarmProcess) {
-    console.log(
-      `Stopping Steam Farm process with PID: ${steamFarmProcess.pid}`
-    );
+    // console.log(
+    //   `Stopping Steam Farm process with PID: ${steamFarmProcess.pid}`
+    // );
     steamFarmProcess.kill("SIGINT"); // Send SIGINT to gracefully terminate the process
     steamFarmProcess.on("exit", (code, signal) => {
-      console.log(
-        `Steam Farm process exited with code ${code} and signal ${signal}`
-      );
+      // console
+      //   .log
+      //   `Steam Farm process exited with code ${code} and signal ${signal}`
+      //   ();
       steamFarmProcess = null;
       res.send("Steam Farm stopped.");
     });
@@ -71,7 +72,7 @@ router.post("/start/discord-idle", (req, res) => {
     });
 
     discordIdleProcess.on("close", (code) => {
-      console.log(`Discord Idle process exited with code ${code}`);
+      // console.log(`Discord Idle process exited with code ${code}`);
       discordIdleProcess = null;
     });
 
@@ -84,14 +85,15 @@ router.post("/start/discord-idle", (req, res) => {
 router.post("/stop/discord-idle", (req, res) => {
   console.log("Received request to stop Discord Idle");
   if (discordIdleProcess) {
-    console.log(
-      `Stopping Discord Idle process with PID: ${discordIdleProcess.pid}`
-    );
+    // console.log(
+    //   `Stopping Discord Idle process with PID: ${discordIdleProcess.pid}`
+    // );
     discordIdleProcess.kill("SIGINT"); // Send SIGINT to gracefully terminate the process
     discordIdleProcess.on("exit", (code, signal) => {
-      console.log(
-        `Discord Idle process exited with code ${code} and signal ${signal}`
-      );
+      // console
+      //   .log
+      //   `Discord Idle process exited with code ${code} and signal ${signal}`
+      //   ();
       discordIdleProcess = null;
       res.send("Discord Idle stopped.");
     });
