@@ -41,25 +41,6 @@ h1 {
   margin-left: 5px;
 }
 
-.status.running {
-  color: green;
-}
-
-.status.stopped {
-  color: red;
-}
-
-/* .page-title {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  font-size: 45px;
-} */
-
-/* .page-title:hover {
-  color: rgb(255, 0, 0);
-} */
-
 .page-title {
   animation: colorChange 0.5s infinite alternate;
 }
@@ -71,4 +52,16 @@ h1 {
   100% {
     color: rgb(255, 0, 0);
   }
+}
+
+.status {
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.status.running {
+  color: green;
+}
+
+.status.stopped {
+  color: red;
 }
