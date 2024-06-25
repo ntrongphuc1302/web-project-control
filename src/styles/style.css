@@ -6,14 +6,50 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* height: 100vh; */
   margin: 0;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  transform-origin: center top; /* Ensure scaling origin is centered */
 }
 
-h1 {
+#navbarContainer {
+  position: relative; /* Ensure the container is positioned relative */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #1f1f1f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-title {
   color: #ffffff;
-  text-align: center;
-  margin-bottom: 20px;
+  margin: 0;
+  animation: colorChange 0.5s infinite alternate;
+  text-align: center; /* Center-align the text */
+  flex-grow: 1; /* Allow the title to take up remaining space */
+  z-index: 1; /* Ensure title is above profile picture */
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 17%;
+  right: 6%;
+  z-index: 2;
+}
+
+.container {
+  width: 210px;
+  text-align: left;
+  background-color: #1f1f1f;
+  padding: 5px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .control {
@@ -21,16 +57,7 @@ h1 {
   color: #ffffff;
   display: flex;
   justify-content: space-between;
-  align-items: space-between;
-}
-
-.container {
-  width: 210px;
-  text-align: left;
-  background-color: #1f1f1f;
-  padding: 5px 20px 5px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: center;
 }
 
 .status {
