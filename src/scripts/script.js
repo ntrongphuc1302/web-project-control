@@ -1,11 +1,7 @@
-// Function to handle errors
 function handleError(error) {
   console.error("Error:", error);
-  // You can add additional error handling logic here,
-  // such as displaying user-friendly messages or logging errors to a server.
 }
 
-// Function to update status for Steam Farm
 function updateSteamFarmStatus() {
   fetch("/control/status/steam-farm")
     .then((response) => {
@@ -25,7 +21,6 @@ function updateSteamFarmStatus() {
     });
 }
 
-// Function to update status for Discord Idle
 function updateDiscordIdleStatus() {
   fetch("/control/status/discord-idle")
     .then((response) => {
@@ -45,7 +40,6 @@ function updateDiscordIdleStatus() {
     });
 }
 
-// Function to update CPU usage
 function updateCPUUsage() {
   fetch("/cpu")
     .then((response) => {
@@ -65,7 +59,6 @@ function updateCPUUsage() {
     });
 }
 
-// Function to update RAM usage
 function updateRAMUsage() {
   fetch("/ram")
     .then((response) => {
@@ -85,7 +78,6 @@ function updateRAMUsage() {
     });
 }
 
-// Function to update uptime
 function updateUptime() {
   fetch("/uptime")
     .then((response) => {
@@ -104,7 +96,6 @@ function updateUptime() {
     });
 }
 
-// Function to update color based on value
 function updateColor(element, value) {
   if (value < 50) {
     element.style.color = "green";
@@ -115,7 +106,6 @@ function updateColor(element, value) {
   }
 }
 
-// Function to update status indicator based on status
 function updateStatusIndicator(element, isRunning) {
   if (isRunning) {
     element.textContent = "ON";
@@ -128,7 +118,6 @@ function updateStatusIndicator(element, isRunning) {
   }
 }
 
-// Function to toggle Steam Farm status
 function toggleSteamFarm() {
   const statusElement = document.getElementById("steamFarmStatus");
   const currentStatus = statusElement.textContent;
@@ -148,7 +137,7 @@ function toggleSteamFarm() {
         `Steam Farm ${currentStatus === "ON" ? "stopped" : "started"}:`,
         data
       );
-      // Update status after toggling
+
       updateSteamFarmStatus();
     })
     .catch((error) => {
@@ -162,7 +151,6 @@ function toggleSteamFarm() {
     });
 }
 
-// Function to toggle Discord Idle status
 function toggleDiscordIdle() {
   const statusElement = document.getElementById("discordIdleStatus");
   const currentStatus = statusElement.textContent;
@@ -182,7 +170,6 @@ function toggleDiscordIdle() {
         `Discord Idle ${currentStatus === "ON" ? "stopped" : "started"}:`,
         data
       );
-      // Update status after toggling
       updateDiscordIdleStatus();
     })
     .catch((error) => {
@@ -196,7 +183,6 @@ function toggleDiscordIdle() {
     });
 }
 
-// Event listeners for toggling status on click
 document
   .getElementById("steamFarmStatus")
   .addEventListener("click", toggleSteamFarm);
@@ -204,7 +190,6 @@ document
   .getElementById("discordIdleStatus")
   .addEventListener("click", toggleDiscordIdle);
 
-// Function to periodically update statuses
 function updateStatuses() {
   updateSteamFarmStatus();
   updateDiscordIdleStatus();
@@ -213,8 +198,6 @@ function updateStatuses() {
   updateUptime();
 }
 
-// Initial update of statuses when the page loads
 updateStatuses();
 
-// Periodically update statuses every 5 seconds (adjust as needed)
 setInterval(updateStatuses, 500);
