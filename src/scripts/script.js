@@ -217,4 +217,4 @@ function updateStatuses() {
 updateStatuses();
 
 // Periodically update statuses every 5 seconds (adjust as needed)
-setInterval(updateStatuses, 1000);
+setInterval(updateStatuses, 500);
