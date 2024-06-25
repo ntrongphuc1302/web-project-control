@@ -1,5 +1,5 @@
 function handleError(error) {
-  console.error("Error:", error);
+  // console.error("Error:", error);
 }
 
 function updateSteamFarmStatus() {
