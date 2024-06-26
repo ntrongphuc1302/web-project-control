@@ -40,6 +40,25 @@ function updateDiscordIdleStatus() {
     });
 }
 
+function updateDiscordBotStatus() {
+  fetch("/control/status/discord-bot")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const discordBotStatus = document.getElementById("discordBotStatus");
+      discordBotStatus.textContent = data.status === "ON" ? "ON" : "OFF";
+      updateStatusIndicator(discordBotStatus, data.status === "ON");
+    })
+    .catch((error) => {
+      console.error("Error fetching Discord Bot status:", error);
+      handleError(error);
+    });
+}
+
 function updateCPUUsage() {
   fetch("/cpu")
     .then((response) => {
@@ -183,16 +202,52 @@ function toggleDiscordIdle() {
     });
 }
 
+function toggleDiscordBot() {
+  const statusElement = document.getElementById("discordBotStatus");
+  const currentStatus = statusElement.textContent;
+  const url =
+    currentStatus === "ON"
+      ? "/control/stop/discord-bot"
+      : "/control/start/discord-bot";
+  fetch(url, { method: "POST" })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      console.log(
+        `Discord Bot ${currentStatus === "ON" ? "stopped" : "started"}:`,
+        data
+      );
+      updateDiscordBotStatus();
+    })
+    .catch((error) => {
+      console.error(
+        `Error toggling Discord Bot ${
+          currentStatus === "ON" ? "stop" : "start"
+        }:`,
+        error
+      );
+      handleError(error);
+    });
+}
+
 document
   .getElementById("steamFarmStatus")
   .addEventListener("click", toggleSteamFarm);
 document
   .getElementById("discordIdleStatus")
   .addEventListener("click", toggleDiscordIdle);
+document
+  .getElementById("discordBotStatus")
+  .addEventListener("click", toggleDiscordBot);
 
 function updateStatuses() {
   updateSteamFarmStatus();
   updateDiscordIdleStatus();
+  updateDiscordBotStatus();
   updateCPUUsage();
   updateRAMUsage();
   updateUptime();

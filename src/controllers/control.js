@@ -5,6 +5,7 @@ const router = express.Router();
 
 let steamFarmProcess = null;
 let discordIdleProcess = null;
+let discordBotProcess = null;
 
 router.post("/start/steam-farm", (req, res) => {
   console.log("Received request to start Steam Farm");
@@ -102,6 +103,54 @@ router.post("/stop/discord-idle", (req, res) => {
   }
 });
 
+router.post("/start/discord-bot", (req, res) => {
+  console.log("Received request to start Discord Bot");
+  if (!discordBotProcess) {
+    const discordBotScript = path.join(
+      __dirname,
+      "../../src/services/discord-bot.js"
+    );
+    discordBotProcess = spawn("node", [discordBotScript]);
+
+    discordBotProcess.stdout.on("data", (data) => {
+      console.log(`${data}`);
+    });
+
+    discordBotProcess.stderr.on("data", (data) => {
+      console.error(`Discord Bot stderr: ${data}`);
+    });
+
+    discordBotProcess.on("close", (code) => {
+      // console.log(`Discord Bot process exited with code ${code}`);
+      discordBotProcess = null;
+    });
+
+    res.send("Discord Bot started.");
+  } else {
+    res.send("Discord Bot is already running.");
+  }
+});
+
+router.post("/stop/discord-bot", (req, res) => {
+  console.log("Received request to stop Discord Bot");
+  if (discordBotProcess) {
+    // console.log(
+    //   `Stopping Discord Bot process with PID: ${discordBotProcess.pid}`
+    // );
+    discordBotProcess.kill("SIGINT"); // Send SIGINT to gracefully terminate the process
+    discordBotProcess.on("exit", (code, signal) => {
+      // console(
+      //   .log
+      //   `Discord Bot process exited with code ${code} and signal ${signal}`
+      //   );
+      discordBotProcess = null;
+      res.send("Discord Bot stopped.");
+    });
+  } else {
+    res.send("Discord Bot is not running.");
+  }
+});
+
 router.get("/status/steam-farm", (req, res) => {
   if (steamFarmProcess) {
     res.send({ status: "ON" });
@@ -112,6 +161,14 @@ router.get("/status/steam-farm", (req, res) => {
 
 router.get("/status/discord-idle", (req, res) => {
   if (discordIdleProcess) {
+    res.send({ status: "ON" });
+  } else {
+    res.send({ status: "OFF" });
+  }
+});
+
+router.get("/status/discord-bot", (req, res) => {
+  if (discordBotProcess) {
     res.send({ status: "ON" });
   } else {
     res.send({ status: "OFF" });
