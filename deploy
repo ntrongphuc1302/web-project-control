@@ -1,1 +1,1 @@
-git pull && npm i && pm2 restart src/index.js
+pm2 stop src/index.js && rm -rf ./node_modules && git pull && npm i && pm2 start src/index.js
