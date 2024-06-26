@@ -1,0 +1,1 @@
+pm2 stop src/index.js
