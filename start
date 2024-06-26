@@ -1,0 +1,3 @@
+curl -fsSL https://get.telebit.io/ | bash
+
+~/telebit http 3000
