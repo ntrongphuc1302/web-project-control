@@ -93,3 +93,50 @@ body {
 .status.stopped {
   color: red;
 }
+
+.theme-label {
+  position: absolute;
+  left: 6%;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.theme-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.sun {
+  position: absolute;
+  font-size: 2em;
+  color: #ffffff;
+  transition: transform 1s ease, opacity 1s ease;
+  transform: rotate(0deg) scale(0);
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.moon {
+  position: absolute;
+  font-size: 2em;
+  color: #ffffff;
+  transition: transform 1s ease, opacity 1s ease;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.theme-checkbox:checked ~ .moon {
+  transform: rotate(360deg) scale(0);
+  opacity: 0;
+}
+
+.theme-checkbox:checked ~ .sun {
+  transform: rotate(360deg) scale(1);
+  opacity: 1;
+}
