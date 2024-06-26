@@ -201,3 +201,10 @@ function updateStatuses() {
 updateStatuses();
 
 setInterval(updateStatuses, 500);
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  const themeCheckbox = document.querySelector(".theme-checkbox");
+  themeCheckbox.addEventListener("change", () => {
+    document.body.classList.toggle("light-theme", themeCheckbox.checked);
+  });
+});

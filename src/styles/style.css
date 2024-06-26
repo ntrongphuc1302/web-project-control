@@ -10,6 +10,12 @@ body {
   overflow-x: hidden; /* Hide horizontal scrollbar */
   overflow-y: hidden; /* Hide vertical scrollbar */
   transform-origin: center top; /* Ensure scaling origin is centered */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+body.light-theme {
+  background-color: #ffffff;
+  color: #121212;
 }
 
 #navbarContainer {
@@ -23,13 +29,26 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+body.light-theme #navbarContainer {
+  background-color: #f1f1f1;
+}
+
 .navbar-title {
-  color: #ffffff;
+  color: var(--navbar-title-color, #ffffff); /* Default color */
   margin: 0;
   animation: colorChange 0.5s infinite alternate;
   text-align: center; /* Center-align the text */
   flex-grow: 1; /* Allow the title to take up remaining space */
   z-index: 1; /* Ensure title is above profile picture */
+  transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+}
+
+body.light-theme .navbar-title {
+  --navbar-title-color: #121212; /* Black color in light theme */
+}
+
+body.light-theme .navbar-title.light-mode-active {
+  color: rgb(255, 0, 0); /* Red color in light theme */
 }
 
 .profile-picture {
@@ -53,12 +72,20 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+body.light-theme .container {
+  background-color: #f1f1f1;
+}
+
 .control {
   width: 100%;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+body.light-theme .control {
+  color: #121212;
 }
 
 .status {
@@ -119,6 +146,11 @@ body {
   transform: rotate(0deg) scale(0);
   opacity: 0;
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  transition-delay: 0s;
+}
+
+body.light-theme .sun {
+  color: #1f1f1f;
 }
 
 .moon {
@@ -129,14 +161,26 @@ body {
   transform: rotate(0deg) scale(1);
   opacity: 1;
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  transition-delay: 0.25s;
+}
+
+body.light-theme .moon {
+  color: #2c3e50;
 }
 
 .theme-checkbox:checked ~ .moon {
+  transition-delay: 0s;
   transform: rotate(360deg) scale(0);
   opacity: 0;
 }
 
 .theme-checkbox:checked ~ .sun {
+  transition-delay: 0.25s;
   transform: rotate(360deg) scale(1);
   opacity: 1;
+}
+
+/* Full page background color change */
+.theme-checkbox:checked ~ body {
+  background-color: #f1f1f1;
 }
