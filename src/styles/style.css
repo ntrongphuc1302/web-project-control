@@ -13,6 +13,10 @@ body {
   transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
+audio {
+  display: none;
+}
+
 body.light-theme {
   background-color: #ffffff;
   color: #121212;
