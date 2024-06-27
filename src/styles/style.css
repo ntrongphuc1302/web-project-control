@@ -259,7 +259,7 @@ body.light-theme .popup {
 #profilePictureContainer {
   position: fixed;
   top: 10px;
-  right: 10px;
+  right: 1.5%;
   width: 40px; /* Adjust size as needed */
   height: 40px; /* Adjust size as needed */
   z-index: 3; /* Ensure profile picture and icon are above other content */
