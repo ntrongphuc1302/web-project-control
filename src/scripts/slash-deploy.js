@@ -1,8 +1,10 @@
 const { REST, Routes, SlashCommandBuilder } = require("discord.js");
-require("dotenv").config();
+require("dotenv").config({
+  path: require("path").resolve(__dirname, "../../.env"),
+});
 
-const botID = "1254855444803883170";
-const token = process.env.token;
+const botID = process.env.discord_bot_id;
+const token = process.env.discord_bot_token;
 
 if (!token) {
   console.error("Token is not defined. Please set it in your .env file.");
@@ -18,11 +20,21 @@ const slashRegister = async () => {
         new SlashCommandBuilder()
           .setName("ping")
           .setDescription("Replies with Pong!"),
+        new SlashCommandBuilder()
+          .setName("avatar")
+          .setDescription(
+            "Replies with the avatar URL of the user or the mentioned user"
+          )
+          .addUserOption((option) =>
+            option
+              .setName("user")
+              .setDescription("The user to get the avatar of")
+          ),
       ],
     });
-    console.log("Slash command registered successfully.");
+    console.log("Slash commands registered successfully.");
   } catch (error) {
-    console.error("Error registering slash command:", error);
+    console.error("Error registering slash commands:", error);
   }
 };
 
