@@ -16,40 +16,75 @@
         <span class="theme-toggle"></span>
       </label>
       <h1 class="navbar-title">PeterKing</h1>
-      <img
-        src="https://avatars.githubusercontent.com/u/104272276?v=4"
-        alt="Profile Picture"
-        class="profile-picture"
-      />
+      <div id="profilePictureContainer">
+        <!-- Profile icon and picture setup -->
+        <div class="icon" id="profileIcon" onclick="togglePopup()">
+          <ion-icon name="person"></ion-icon>
+        </div>
+        <img
+          src="https://avatars.githubusercontent.com/u/104272276?v=4"
+          alt="Profile Picture"
+          class="profile-picture hidden"
+          id="profilePicture"
+        />
+      </div>
     </div>
     <div><p></p></div>
+    <!-- Popup for entering passcode -->
+    <div id="popup" class="popup hidden">
+      <div class="popup-content">
+        <input type="text" id="codeInput" placeholder="Enter code..." />
+        <button onclick="checkCode()">Submit</button>
+      </div>
+    </div>
+
+    <!-- Status containers -->
     <div class="container">
       <div>
         <h2 class="control">
           Steam Farm:
-          <span id="steamFarmStatus" class="status running"></span>
+          <div id="steamFarmWrapper" class="status-wrapper">
+            <span
+              id="steamFarmStatus"
+              class="status running disabled-overlay"
+            ></span>
+          </div>
         </h2>
       </div>
     </div>
     <div><p></p></div>
+
     <div class="container">
       <div>
         <h2 class="control">
           Discord Idle:
-          <span id="discordIdleStatus" class="status stopped"></span>
+          <div id="discordIdleWrapper" class="status-wrapper">
+            <span
+              id="discordIdleStatus"
+              class="status stopped disabled-overlay"
+            ></span>
+          </div>
         </h2>
       </div>
     </div>
     <div><p></p></div>
+
     <div class="container">
       <div>
         <h2 class="control">
           Discord Bot:
-          <span id="discordBotStatus" class="status stopped"></span>
+          <div id="discordBotWrapper" class="status-wrapper">
+            <span
+              id="discordBotStatus"
+              class="status stopped disabled-overlay"
+            ></span>
+          </div>
         </h2>
       </div>
     </div>
     <div><p></p></div>
+
+    <!-- System info -->
     <div class="container">
       <div>
         <h2 class="system-info">
@@ -70,6 +105,8 @@
         </h2>
       </div>
     </div>
+
+    <!-- Scripts -->
     <script src="./scripts/script.js"></script>
     <script
       type="module"
