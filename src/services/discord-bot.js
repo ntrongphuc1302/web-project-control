@@ -47,7 +47,6 @@ client.on("interactionCreate", async (interaction) => {
 
       await interaction.reply({
         embeds: [embed],
-        ephemeral: true,
       });
       console.log(
         `\x1b[1mBot\x1b[0m: Command /avatar used by ${interaction.user.tag} in ${interaction.guild.name}`
