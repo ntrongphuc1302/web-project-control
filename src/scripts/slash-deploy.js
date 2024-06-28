@@ -30,6 +30,9 @@ const slashRegister = async () => {
               .setName("user")
               .setDescription("The user to get the avatar of")
           ),
+        new SlashCommandBuilder()
+          .setName("dev")
+          .setDescription("Discord Developer Portal"),
       ],
     });
     console.log("Slash commands registered successfully.");

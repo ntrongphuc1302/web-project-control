@@ -54,6 +54,24 @@ client.on("interactionCreate", async (interaction) => {
       console.log(
         `\x1b[1mBot\x1b[0m: Command /avatar used by ${interaction.user.tag} in ${interaction.guild.name}`
       );
+    } else if (interaction.commandName === "dev") {
+      if (interaction.user.id === process.env.discord_bot_owner_id) {
+        await interaction.reply({
+          content: "https://discord.com/developers/active-developer",
+          ephemeral: true,
+        });
+        console.log(
+          `\x1b[1mBot\x1b[0m: Command /dev used by ${interaction.user.tag} in ${interaction.guild.name}`
+        );
+      } else {
+        await interaction.reply({
+          content: "You do not have permission to use this command.",
+          ephemeral: true,
+        });
+        console.log(
+          `\x1b[1mBot\x1b[0m: Unauthorized use of /dev command by ${interaction.user.tag} in ${interaction.guild.name}`
+        );
+      }
     }
   }
 });
