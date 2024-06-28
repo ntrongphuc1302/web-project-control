@@ -1,53 +1,3 @@
-// Function to toggle popup visibility
-function togglePopup() {
-  const popup = document.getElementById("popup");
-  popup.classList.toggle("active");
-}
-
-// Function to check the entered code
-function checkCode() {
-  const enteredCode = document.getElementById("codeInput").value.trim();
-  const profilePicture = document.querySelector(".profile-picture");
-
-  if (enteredCode === "281103") {
-    profilePicture.src = ""; // Set the new profile picture URL here if you have one
-    profilePicture.innerHTML = '<ion-icon name="person"></ion-icon>';
-    togglePopup(); // Close the popup after successful code entry
-  } else {
-    alert("Invalid code. Please try again.");
-  }
-}
-
-// Open popup on profile picture click
-document.querySelector(".profile-picture").addEventListener("click", () => {
-  togglePopup();
-});
-
-let passcodeEntered = false; // Flag to track if passcode is entered
-
-// Function to handle passcode entry
-function checkCode() {
-  const enteredCode = document.getElementById("codeInput").value.trim();
-
-  if (enteredCode === "281103") {
-    passcodeEntered = true;
-    togglePopup(); // Close popup on correct code entry
-    enableInteractions(); // Enable interactions after correct code entry
-  } else {
-    alert("Invalid code. Please try again.");
-  }
-}
-
-// Function to enable interactions
-function enableInteractions() {
-  const statusElements = document.querySelectorAll(".status");
-  statusElements.forEach((element) => {
-    element.classList.remove("disabled-overlay");
-    element.style.opacity = ""; // Reset opacity
-    element.style.pointerEvents = ""; // Reset pointer events
-  });
-}
-
 function handleError(error) {
   console.error("Error:", error);
 }
@@ -309,7 +259,13 @@ setInterval(updateStatuses, 500);
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const themeCheckbox = document.querySelector(".theme-checkbox");
+  const body = document.body;
+
   themeCheckbox.addEventListener("change", () => {
-    document.body.classList.toggle("light-theme", themeCheckbox.checked);
+    if (themeCheckbox.checked) {
+      body.classList.add("light-theme");
+    } else {
+      body.classList.remove("light-theme");
+    }
   });
 });

@@ -12,6 +12,8 @@ body {
   overflow-y: hidden; /* Hide vertical scrollbar */
   transform-origin: center top; /* Ensure scaling origin is centered */
   transition: background-color 0.3s ease; /* Smooth transition for background color */
+  user-select: none; /* Disable text selection */
+  -webkit-user-select: none; /* For older versions of Safari */
 }
 
 /* Hide audio elements globally */
@@ -53,13 +55,14 @@ body.light-theme #navbarContainer {
   z-index: 1;
 }
 
-/* Centered navbar title text */
 .navbar-title-text {
   transition: color 0.3s ease-in-out; /* Smooth transition for color change */
   animation: colorChange 0.5s infinite alternate;
   position: absolute;
   left: 50%;
   transform: translateX(-50%); /* Center the text */
+  user-select: none; /* Disable text selection */
+  -webkit-user-select: none; /* For older versions of Safari */
 }
 
 .navbar-title-text:hover {
@@ -83,30 +86,6 @@ body.light-theme .navbar-title {
   100% {
     color: rgb(255, 0, 0);
   }
-}
-
-/* Profile picture styles */
-.profile-picture {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  position: absolute;
-  right: 10px;
-  z-index: 3; /* Ensure profile picture is above navbar */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-  opacity: 0; /* Start with profile picture hidden */
-}
-
-/* Profile icon styles */
-#profileIcon {
-  font-size: 2em;
-  position: absolute;
-  right: 10px;
-  z-index: 3; /* Ensure profile icon is above navbar */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-  opacity: 1; /* Start with profile icon visible */
 }
 
 /* Container styles */
@@ -225,109 +204,4 @@ body.light-theme .moon {
 /* Full page background color change */
 .theme-checkbox:checked ~ body {
   background-color: #f1f1f1;
-}
-
-/* Popup styles */
-.popup {
-  display: none;
-  position: fixed;
-  top: 15%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  background-color: #1f1f1f;
-  padding: 18px 40px 18px 18px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-
-/* Light theme popup */
-body.light-theme .popup {
-  background-color: #f1f1f1;
-}
-
-/* Active popup */
-.popup.active {
-  display: block;
-  opacity: 1;
-}
-
-/* Disabled overlay for status elements */
-.disabled-overlay {
-  pointer-events: none; /* Disable mouse interactions */
-}
-
-.status.disabled-overlay:hover {
-  cursor: not-allowed; /* Show 'not allowed' cursor on hover */
-}
-
-/* Profile picture container styles */
-#profilePictureContainer {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center; /* Center vertically */
-  z-index: 3; /* Ensure profile picture and icon are above other content */
-}
-
-/* Profile picture and icon styles */
-#profileIcon,
-.profile-picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.profile-picture.visible {
-  opacity: 1; /* Show profile picture when it has the 'visible' class */
-}
-
-.hidden {
-  opacity: 0; /* Hide elements when they have the 'hidden' class */
-}
-
-input#codeInput {
-  width: 50px;
-}
-
-.btn-passcode {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  top: 31%;
-  right: 15%;
-  background-color: #1f1f1f;
-  border: none;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background color and color */
-}
-
-/* Light theme btn-passcode */
-body.light-theme .btn-passcode {
-  background-color: #f1f1f1;
-  color: #121212; /* Ensure the text color is updated for light theme */
-}
-
-/* Icon submit styles */
-.icon-submit {
-  color: red;
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  top: 1.5%;
-  right: -10%;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background color and color */
-}
-
-/* Light theme icon submit */
-body.light-theme .icon-submit {
-  color: red; /* Ensure the text color is updated for light theme */
-}
-
-.icon-submit:hover {
-  cursor: pointer;
 }
