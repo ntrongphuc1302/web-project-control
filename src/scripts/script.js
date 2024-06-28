@@ -234,15 +234,23 @@ function toggleDiscordBot() {
     });
 }
 
-document
-  .getElementById("steamFarmStatus")
-  .addEventListener("click", toggleSteamFarm);
-document
-  .getElementById("discordIdleStatus")
-  .addEventListener("click", toggleDiscordIdle);
-document
-  .getElementById("discordBotStatus")
-  .addEventListener("click", toggleDiscordBot);
+document.getElementById("steamFarmStatus").addEventListener("click", () => {
+  if (document.querySelector(".active-checkbox").checked) {
+    toggleSteamFarm();
+  }
+});
+
+document.getElementById("discordIdleStatus").addEventListener("click", () => {
+  if (document.querySelector(".active-checkbox").checked) {
+    toggleDiscordIdle();
+  }
+});
+
+document.getElementById("discordBotStatus").addEventListener("click", () => {
+  if (document.querySelector(".active-checkbox").checked) {
+    toggleDiscordBot();
+  }
+});
 
 function updateStatuses() {
   updateSteamFarmStatus();
@@ -255,7 +263,11 @@ function updateStatuses() {
 
 updateStatuses();
 
-setInterval(updateStatuses, 500);
+setInterval(() => {
+  if (document.querySelector(".active-checkbox").checked) {
+    updateStatuses();
+  }
+}, 500);
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const themeCheckbox = document.querySelector(".theme-checkbox");
@@ -266,6 +278,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
       body.classList.add("light-theme");
     } else {
       body.classList.remove("light-theme");
+    }
+  });
+
+  const activeCheckbox = document.querySelector(".active-checkbox");
+  activeCheckbox.addEventListener("change", () => {
+    const containers = document.querySelectorAll(".status-wrapper");
+    containers.forEach((container) => {
+      container.classList.toggle("disabled-overlay");
+    });
+
+    // Disable pointer events for the toggle button
+    const toggleButtons = document.querySelectorAll(".status");
+    toggleButtons.forEach((button) => {
+      if (activeCheckbox.checked) {
+        button.style.pointerEvents = "auto";
+      } else {
+        button.style.pointerEvents = "none";
+      }
+    });
+  });
+
+  // Initial state of toggle buttons based on active-checkbox
+  const toggleButtons = document.querySelectorAll(".status");
+  toggleButtons.forEach((button) => {
+    if (!activeCheckbox.checked) {
+      button.style.pointerEvents = "none";
     }
   });
 });

@@ -209,20 +209,21 @@ body.light-theme .moon {
 /* Active label styles */
 .active-label {
   position: absolute;
-  right: 6%;
+  right: 13%;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   z-index: 2;
 }
 
-/* Theme checkbox styles */
+/* Active checkbox styles */
 .active-checkbox {
   position: absolute;
   opacity: 0;
   width: 24px;
   height: 24px;
-  cursor: pointer;
+  pointer-events: none;
+  cursor: none;
 }
 
 /* Active icon styles */
@@ -232,18 +233,23 @@ body.light-theme .moon {
   color: #ffffff;
   transition: transform 1s ease, opacity 1s ease;
   transform: rotate(0deg) scale(1);
-  opacity: 1;
+  opacity: 0;
   transition-delay: 0.25s;
 }
 
 body.light-theme .active {
   color: #1f1f1f;
+  transition-delay: 0.25s;
 }
 
 /* Checkbox checked states */
-.theme-checkbox:checked ~ .active {
-  transition-delay: 0s;
-  transform: rotate(360deg) scale(1);
+.active-checkbox:checked ~ .active {
   opacity: 1;
-  color: red;
+}
+
+/* Updated CSS for overlay effect */
+.control.disabled-overlay {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5; /* Adjust opacity as needed */
 }
