@@ -15,7 +15,9 @@
         <ion-icon name="moon" class="moon"></ion-icon>
         <span class="theme-toggle"></span>
       </label>
-      <h1 class="navbar-title">PeterKing</h1>
+      <h1 class="navbar-title">
+        <h1 class="navbar-title-text">PeterKing</h1>
+      </h1>
       <div id="profilePictureContainer">
         <!-- Profile icon and picture setup -->
         <div class="icon" id="profileIcon" onclick="togglePopup()">
@@ -33,9 +35,9 @@
     <!-- Popup for entering passcode -->
     <div id="popup" class="popup hidden">
       <div class="popup-content">
-        <input type="text" id="codeInput" placeholder="Secret Code" />
-        <button onclick="checkCode()">
-          <ion-icon name="play"></ion-icon>
+        <input type="text" id="codeInput" placeholder="Code" />
+        <button class="btn-passcode" onclick="checkCode()">
+          <ion-icon class="icon-submit" name="play"></ion-icon>
         </button>
       </div>
     </div>

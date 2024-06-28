@@ -29,13 +29,14 @@ body.light-theme {
 #navbarContainer {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the content horizontally */
   align-items: center;
   width: 100%;
   padding: 10px 20px;
   background-color: #1f1f1f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1; /* Ensure navbar is above other content */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 /* Light theme navbar container */
@@ -46,17 +47,32 @@ body.light-theme #navbarContainer {
 /* Navbar title styles */
 .navbar-title {
   color: var(--navbar-title-color, #ffffff); /* Default color */
-  margin: 0;
-  animation: colorChange 0.5s infinite alternate;
+  margin: 10;
   text-align: center;
   flex-grow: 1;
   z-index: 1;
+}
+
+/* Centered navbar title text */
+.navbar-title-text {
   transition: color 0.3s ease-in-out; /* Smooth transition for color change */
+  animation: colorChange 0.5s infinite alternate;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Center the text */
+}
+
+.navbar-title-text:hover {
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 /* Light theme navbar title */
 body.light-theme .navbar-title {
   --navbar-title-color: #121212; /* Black color in light theme */
+}
+
+.navbar-title:hover {
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 /* Animation for color change */
@@ -76,8 +92,7 @@ body.light-theme .navbar-title {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  position: fixed;
-  top: 10px;
+  position: absolute;
   right: 10px;
   z-index: 3; /* Ensure profile picture is above navbar */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
@@ -87,19 +102,11 @@ body.light-theme .navbar-title {
 /* Profile icon styles */
 #profileIcon {
   font-size: 2em;
-  position: fixed;
-  top: 10px;
+  position: absolute;
   right: 10px;
   z-index: 3; /* Ensure profile icon is above navbar */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
   opacity: 1; /* Start with profile icon visible */
-}
-
-/* Hover effect */
-#profileIcon:hover,
-.profile-picture:hover {
-  transform: scale(1.1); /* Scale up slightly on hover */
-  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 /* Container styles */
@@ -111,6 +118,7 @@ body.light-theme .navbar-title {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 2; /* Ensure container is above background */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background and text colors */
 }
 
 /* Light theme container */
@@ -223,11 +231,11 @@ body.light-theme .moon {
 .popup {
   display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 15%;
+  left: 80%;
   transform: translate(-50%, -50%);
   background-color: #1f1f1f;
-  padding: 20px;
+  padding: 18px 40px 18px 18px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 1000;
@@ -257,22 +265,22 @@ body.light-theme .popup {
 
 /* Profile picture container styles */
 #profilePictureContainer {
-  position: fixed;
-  top: 10px;
-  right: 1%;
-  width: 40px; /* Adjust size as needed */
-  height: 40px; /* Adjust size as needed */
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center; /* Center vertically */
   z-index: 3; /* Ensure profile picture and icon are above other content */
 }
 
 /* Profile picture and icon styles */
 #profileIcon,
 .profile-picture {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile-picture.visible {
@@ -281,4 +289,45 @@ body.light-theme .popup {
 
 .hidden {
   opacity: 0; /* Hide elements when they have the 'hidden' class */
+}
+
+input#codeInput {
+  width: 50px;
+}
+
+.btn-passcode {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 31%;
+  right: 15%;
+  background-color: #1f1f1f;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background color and color */
+}
+
+/* Light theme btn-passcode */
+body.light-theme .btn-passcode {
+  background-color: #f1f1f1;
+  color: #121212; /* Ensure the text color is updated for light theme */
+}
+
+/* Icon submit styles */
+.icon-submit {
+  color: red;
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 1.5%;
+  right: -10%;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions for background color and color */
+}
+
+/* Light theme icon submit */
+body.light-theme .icon-submit {
+  color: red; /* Ensure the text color is updated for light theme */
+}
+
+.icon-submit:hover {
+  cursor: pointer;
 }
