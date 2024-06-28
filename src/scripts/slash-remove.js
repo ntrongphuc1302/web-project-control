@@ -13,7 +13,7 @@ if (!token) {
   process.exit(1);
 }
 
-const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST().setToken(token);
 
 const removeSlashCommands = async () => {
   try {
