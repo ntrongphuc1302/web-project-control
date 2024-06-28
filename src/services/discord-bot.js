@@ -95,12 +95,14 @@ client.on("interactionCreate", async (interaction) => {
         "https://media.giphy.com/media/AsfJT1vNXYyBWlPe4S/giphy.gif?cid=ecf05e47wz89igeh82hkjx10ga7ivc1juop9xgnq21zlc2ku&ep=v1_gifs_search&rid=giphy.gif&ct=g",
         "https://media.giphy.com/media/l1KVawssBSgqhhD0s/giphy.gif?cid=ecf05e47a6n20xc6sc4vj9725v566b38des0b7a9i9nj0e4o&ep=v1_gifs_search&rid=giphy.gif&ct=g",
         "https://media.giphy.com/media/aXmxDXlkvau72ocoiG/giphy.gif?cid=ecf05e47wa7w7ac2uqb7h2f62s1y8fax5iv110qldp401nom&ep=v1_gifs_search&rid=giphy.gif&ct=g",
-        "https://tenor.com/bDds5.gif",
         "https://giffiles.alphacoders.com/918/91854.gif",
-        "https://tenor.com/bH8m8.gif",
         "https://static.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/8/86/Summoning_Demons_Animated.gif",
-        "https://tenor.com/b12g2.gif",
         "https://media4.giphy.com/media/tqdVHuhuWqoShOHJlY/200w.gif?cid=6c09b952w9wl21t7lpu45lm6weudaotnqho63cwqhha71207&ep=v1_gifs_search&rid=200w.gif&ct=g",
+        "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGIyMmR1MmRkcHc1Y20yZmo2ZHk1OXlzc25wNDA2MnViMTRxenNubiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kDiEGalbSBPCiYHujk/giphy.gif",
+        "https://media.giphy.com/media/OxsONVdDzQiKZeuty8/giphy.gif?cid=ecf05e47487r71ogbnpoqzxbxryuhhs5uuq9si1tqc6qrzjn&ep=v1_gifs_related&rid=giphy.gif&ct=g",
+        "https://media.giphy.com/media/hdCnteyCteLC6XmF2k/giphy.gif?cid=ecf05e47ey8ujfv4tpzw7v6hw46sazbt0jspnva13potfhiv&ep=v1_gifs_related&rid=giphy.gif&ct=g",
+        "https://media.giphy.com/media/r8cPSALOBMPiMZSpfm/giphy.gif?cid=ecf05e47ey8ujfv4tpzw7v6hw46sazbt0jspnva13potfhiv&ep=v1_gifs_related&rid=giphy.gif&ct=g",
+        "https://media.giphy.com/media/l1J3Mx6k2HlU2y5l6/giphy.gif?cid=ecf05e47zrqsnla5rj6aeplk9x0xn0e0216ijds7lwuck5kc&ep=v1_gifs_related&rid=giphy.gif&ct=g",
       ];
       const summonGif =
         summonGifs[Math.floor(Math.random() * summonGifs.length)];
