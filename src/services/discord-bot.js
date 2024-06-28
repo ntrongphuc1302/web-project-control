@@ -75,6 +75,15 @@ client.on("interactionCreate", async (interaction) => {
         `${user} appears with a flash, summoned by ${interaction.user}!`,
         `${interaction.user} has conjured ${user} from the depths!`,
         `${user} is here, summoned by the mighty ${interaction.user}!`,
+        `${user}, you are needed by ${interaction.user}!`,
+        `${interaction.user} has called you from beyond, ${user}!`,
+        `${user} has been beckoned by ${interaction.user}!`,
+        `${interaction.user} has cast a spell to summon ${user}!`,
+        `A portal opens and ${user} steps through, summoned by ${interaction.user}!`,
+        `${interaction.user} has raised ${user} from the shadows!`,
+        `${user}, your presence is required by ${interaction.user}!`,
+        `An ancient ritual by ${interaction.user} brings forth ${user}!`,
+        `${user} has been magically summoned by ${interaction.user}!`,
       ];
       const summonMessage =
         summonMessages[Math.floor(Math.random() * summonMessages.length)];
@@ -91,6 +100,7 @@ client.on("interactionCreate", async (interaction) => {
         "https://tenor.com/bH8m8.gif",
         "https://static.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/8/86/Summoning_Demons_Animated.gif",
         "https://tenor.com/b12g2.gif",
+        "https://media4.giphy.com/media/tqdVHuhuWqoShOHJlY/200w.gif?cid=6c09b952w9wl21t7lpu45lm6weudaotnqho63cwqhha71207&ep=v1_gifs_search&rid=200w.gif&ct=g",
       ];
       const summonGif =
         summonGifs[Math.floor(Math.random() * summonGifs.length)];
@@ -109,6 +119,15 @@ client.on("interactionCreate", async (interaction) => {
         `${interaction.user} wants you in ${interaction.guild.name}!`,
         `Prepare yourself, ${interaction.user} has summoned you in ${interaction.guild.name}!`,
         `Time to shine! ${interaction.user} is summoning you in ${interaction.guild.name}!`,
+        `Attention! ${interaction.user} has called for you in ${interaction.guild.name}!`,
+        `Your presence is needed by ${interaction.user} in ${interaction.guild.name}!`,
+        `You've been summoned by ${interaction.user} in ${interaction.guild.name}!`,
+        `${interaction.user} has invoked your presence in ${interaction.guild.name}!`,
+        `Get ready! ${interaction.user} has summoned you in ${interaction.guild.name}!`,
+        `A summoning by ${interaction.user} requires your presence in ${interaction.guild.name}!`,
+        `It's time! ${interaction.user} has summoned you in ${interaction.guild.name}!`,
+        `${interaction.user} has called you forth in ${interaction.guild.name}!`,
+        `You are being summoned by ${interaction.user} in ${interaction.guild.name}!`,
       ];
       const dmMessage =
         dmMessages[Math.floor(Math.random() * dmMessages.length)];
