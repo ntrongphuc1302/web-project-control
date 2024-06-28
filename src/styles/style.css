@@ -205,3 +205,45 @@ body.light-theme .moon {
 .theme-checkbox:checked ~ body {
   background-color: #f1f1f1;
 }
+
+/* Active label styles */
+.active-label {
+  position: absolute;
+  right: 6%;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Theme checkbox styles */
+.active-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Active icon styles */
+.active {
+  position: fixed;
+  font-size: 2em;
+  color: #ffffff;
+  transition: transform 1s ease, opacity 1s ease;
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  transition-delay: 0.25s;
+}
+
+body.light-theme .active {
+  color: #1f1f1f;
+}
+
+/* Checkbox checked states */
+.theme-checkbox:checked ~ .active {
+  transition-delay: 0s;
+  transform: rotate(360deg) scale(1);
+  opacity: 1;
+  color: red;
+}
