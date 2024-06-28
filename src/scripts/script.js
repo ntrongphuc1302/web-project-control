@@ -235,21 +235,15 @@ function toggleDiscordBot() {
 }
 
 document.getElementById("steamFarmStatus").addEventListener("click", () => {
-  if (document.querySelector(".active-checkbox").checked) {
-    toggleSteamFarm();
-  }
+  toggleSteamFarm();
 });
 
 document.getElementById("discordIdleStatus").addEventListener("click", () => {
-  if (document.querySelector(".active-checkbox").checked) {
-    toggleDiscordIdle();
-  }
+  toggleDiscordIdle();
 });
 
 document.getElementById("discordBotStatus").addEventListener("click", () => {
-  if (document.querySelector(".active-checkbox").checked) {
-    toggleDiscordBot();
-  }
+  toggleDiscordBot();
 });
 
 function updateStatuses() {
@@ -264,9 +258,7 @@ function updateStatuses() {
 updateStatuses();
 
 setInterval(() => {
-  if (document.querySelector(".active-checkbox").checked) {
-    updateStatuses();
-  }
+  updateStatuses();
 }, 500);
 
 document.addEventListener("DOMContentLoaded", (event) => {
