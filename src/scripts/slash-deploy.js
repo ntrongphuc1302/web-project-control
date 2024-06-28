@@ -7,11 +7,13 @@ const botID = process.env.discord_bot_id;
 const token = process.env.discord_bot_token;
 
 if (!token) {
-  console.error("Token is not defined. Please set it in your .env file.");
+  console.error(
+    "Uh-oh! It looks like the bot token is missing. Please set it in your .env file."
+  );
   process.exit(1);
 }
 
-const rest = new REST({ version: "9" }).setToken(token);
+const rest = new REST({ version: "10" }).setToken(token);
 
 const slashRegister = async () => {
   try {
@@ -32,12 +34,15 @@ const slashRegister = async () => {
           ),
         new SlashCommandBuilder()
           .setName("dev")
-          .setDescription("Discord Developer Portal"),
+          .setDescription("Takes you to the Discord Developer Portal"),
       ],
     });
-    console.log("Slash commands registered successfully.");
+    console.log("🎉 Hooray! Slash commands have been registered successfully.");
   } catch (error) {
-    console.error("Error registering slash commands:", error);
+    console.error(
+      "⚠️ Oops! There was an error registering the slash commands:",
+      error
+    );
   }
 };
 
