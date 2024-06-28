@@ -35,6 +35,15 @@ const slashRegister = async () => {
         new SlashCommandBuilder()
           .setName("dev")
           .setDescription("Takes you to the Discord Developer Portal"),
+        new SlashCommandBuilder()
+          .setName("summon")
+          .setDescription("Summons someone on the server")
+          .addUserOption((option) =>
+            option
+              .setName("user")
+              .setDescription("The user to summon")
+              .setRequired(true)
+          ),
       ],
     });
     console.log("🎉 Hooray! Slash commands have been registered successfully.");
