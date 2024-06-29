@@ -1,6 +1,7 @@
 require("dotenv").config({
   path: require("path").resolve(__dirname, "../../.env"),
 });
+const { statuses } = require("./discord-bot-data.js"); // Import your status messages
 
 const {
   Client,
@@ -20,9 +21,31 @@ const client = new Client({
   ],
 });
 
-client.on("ready", () => {
+// Function to set a random status
+function setRandomStatus() {
+  const randomIndex = Math.floor(Math.random() * statuses.length);
+  const randomStatus = statuses[randomIndex];
+  client.user.setActivity(randomStatus); // Set the status
+}
+
+client.once("ready", () => {
   console.log("\x1b[1mBot\x1b[0m is now \x1b[32mOnline\x1b[0m!");
+  setRandomStatus(); // Set initial random status
+
+  // Set interval to change status every 10 minutes
+  setInterval(() => {
+    setRandomStatus();
+  }, 10 * 60 * 1000);
 });
+
+// Handle reconnects by setting a new status
+client.on("shardResume", () => {
+  setRandomStatus();
+});
+
+// client.on("ready", () => {
+//   console.log("\x1b[1mBot\x1b[0m is now \x1b[32mOnline\x1b[0m!");
+// });
 
 client.on("interactionCreate", async (interaction) => {
   if (interaction.isCommand()) {
