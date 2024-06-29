@@ -5,6 +5,7 @@ require("dotenv").config({
 
 const botID = process.env.discord_bot_id;
 const token = process.env.discord_bot_token;
+const ownerID = process.env.bot_owner_id; // Replace with your bot's owner ID
 
 if (!token) {
   console.error(
@@ -52,6 +53,15 @@ const slashRegister = async () => {
           )
           .addAttachmentOption((option) =>
             option.setName("file").setDescription("Attach the new avatar file")
+          ),
+        new SlashCommandBuilder()
+          .setName("set-name")
+          .setDescription("Set the bot's name")
+          .addStringOption((option) =>
+            option
+              .setName("name")
+              .setDescription("The new name of the bot")
+              .setRequired(true)
           ),
       ],
     });

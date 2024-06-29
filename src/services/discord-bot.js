@@ -237,6 +237,35 @@ client.on("interactionCreate", async (interaction) => {
       console.log(
         `\x1b[1mBot\x1b[0m: Command /set-avatar used by ${interaction.user.tag} in ${interaction.guild.name}`
       );
+    } else if (commandName === "set-name") {
+      // Handle /set-name command
+      if (interaction.user.id !== process.env.discord_bot_owner_id) {
+        await interaction.reply({
+          content: "You do not have permission to use this command.",
+          ephemeral: true,
+        });
+        console.log(
+          `\x1b[1mBot\x1b[0m: Unauthorized use of /set-name command by ${interaction.user.tag} in ${interaction.guild.name}`
+        );
+        return;
+      }
+
+      const newName = interaction.options.getString("name");
+
+      try {
+        await client.user.setUsername(newName);
+        await interaction.reply({
+          content: `Bot name set to ${newName} successfully!`,
+          ephemeral: true,
+        });
+      } catch (error) {
+        console.error("Error setting bot name:", error);
+        await interaction.reply("Failed to set bot name.");
+      }
+
+      console.log(
+        `\x1b[1mBot\x1b[0m: Command /set-name used by ${interaction.user.tag} to set bot name to ${newName} in ${interaction.guild.name}`
+      );
     }
   }
 });
