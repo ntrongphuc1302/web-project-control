@@ -1,11 +1,16 @@
-// Load environment variables from .env file
 require("dotenv").config({
   path: require("path").resolve(__dirname, "../../.env"),
 });
 
-const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits,
+  EmbedBuilder,
+  AttachmentBuilder,
+} = require("discord.js");
+const fs = require("fs");
+const axios = require("axios");
 
-// Initialize the client with the correct intent flag
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -15,12 +20,10 @@ const client = new Client({
   ],
 });
 
-// Event handler for when the bot is ready
 client.on("ready", () => {
   console.log("\x1b[1mBot\x1b[0m is now \x1b[32mOnline\x1b[0m!");
 });
 
-// Event handler for when an interaction is created
 client.on("interactionCreate", async (interaction) => {
   if (interaction.isCommand()) {
     const { commandName } = interaction;
@@ -61,7 +64,6 @@ client.on("interactionCreate", async (interaction) => {
         return;
       }
 
-      // Summon message array
       const summonMessages = [
         `${interaction.user} has summoned ${user}!`,
         `${user}, you have been summoned by ${interaction.user}!`,
@@ -88,7 +90,6 @@ client.on("interactionCreate", async (interaction) => {
       const summonMessage =
         summonMessages[Math.floor(Math.random() * summonMessages.length)];
 
-      // Summon GIF array
       const summonGifs = [
         "https://media1.tenor.com/m/XabkWMY86ZcAAAAC/naruto-summoning.gif",
         "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTU3d2kyazhhaWtxaHZkYnNzNmFlMDVobWZ6MWZ3ejlnMm5qNDM5aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0wlOkICxril2UixAaf/giphy.gif",
@@ -107,7 +108,6 @@ client.on("interactionCreate", async (interaction) => {
       const summonGif =
         summonGifs[Math.floor(Math.random() * summonGifs.length)];
 
-      // DM message array
       const dmMessages = [
         `You have been summoned by ${interaction.user} in ${interaction.guild.name}!`,
         `${interaction.user} is calling for you in ${interaction.guild.name}!`,
@@ -176,6 +176,67 @@ client.on("interactionCreate", async (interaction) => {
           `\x1b[1mBot\x1b[0m: Unauthorized use of /dev command by ${interaction.user.tag} in ${interaction.guild.name}`
         );
       }
+    } else if (commandName === "set-avatar") {
+      if (interaction.user.id !== process.env.discord_bot_owner_id) {
+        await interaction.reply({
+          content: "You do not have permission to use this command.",
+          ephemeral: true,
+        });
+        console.log(
+          `\x1b[1mBot\x1b[0m: Unauthorized use of /set-avatar command by ${interaction.user.tag} in ${interaction.guild.name}`
+        );
+        return;
+      }
+
+      const url = interaction.options.getString("url");
+      const attachment = interaction.options.getAttachment("file");
+
+      if (url) {
+        try {
+          const response = await axios.get(url, {
+            responseType: "arraybuffer",
+          });
+          const buffer = Buffer.from(response.data, "binary");
+          await client.user.setAvatar(buffer);
+          await interaction.reply({
+            content: "Avatar updated successfully!",
+            ephemeral: true,
+          });
+        } catch (error) {
+          console.error("Error setting avatar from URL:", error);
+          await interaction.reply({
+            content: "Failed to set avatar from URL.",
+            ephemeral: true,
+          });
+        }
+      } else if (attachment) {
+        try {
+          const response = await axios.get(attachment.url, {
+            responseType: "arraybuffer",
+          });
+          const buffer = Buffer.from(response.data, "binary");
+          await client.user.setAvatar(buffer);
+          await interaction.reply({
+            content: "Avatar updated successfully!",
+            ephemeral: true,
+          });
+        } catch (error) {
+          console.error("Error setting avatar from attachment:", error);
+          await interaction.reply({
+            content: "Failed to set avatar from attachment.",
+            ephemeral: true,
+          });
+        }
+      } else {
+        await interaction.reply({
+          content: "Please provide a URL or attach a file.",
+          ephemeral: true,
+        });
+      }
+
+      console.log(
+        `\x1b[1mBot\x1b[0m: Command /set-avatar used by ${interaction.user.tag} in ${interaction.guild.name}`
+      );
     }
   }
 });

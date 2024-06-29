@@ -44,6 +44,15 @@ const slashRegister = async () => {
               .setDescription("The user to summon")
               .setRequired(true)
           ),
+        new SlashCommandBuilder()
+          .setName("set-avatar")
+          .setDescription("Set the bot's avatar")
+          .addStringOption((option) =>
+            option.setName("url").setDescription("The URL of the new avatar")
+          )
+          .addAttachmentOption((option) =>
+            option.setName("file").setDescription("Attach the new avatar file")
+          ),
       ],
     });
     console.log("🎉 Hooray! Slash commands have been registered successfully.");
