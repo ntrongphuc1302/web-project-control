@@ -1,7 +1,7 @@
 require("dotenv").config({
   path: require("path").resolve(__dirname, "../../.env"),
 });
-const { statuses, summonGifs } = require("./discord-bot-data.js");
+const { statuses, summonGifs } = require("../data/discord-bot-data.js");
 
 const {
   Client,
